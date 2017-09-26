@@ -2,17 +2,18 @@ package com.example.eduardo.examenandroideduardocampos;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 /**
  * Created by Eduardo on 26/09/2017.
  */
 
-public class Contacto implements Parcelable{
+public class Contacto implements Parcelable, Comparable<Contacto>{
 
     String nombre, correo;
 
     Integer edad;
-
+    // Constructor
     public Contacto(String nombre, String correo, Integer edad) {
 
         this.nombre = nombre;
@@ -22,7 +23,7 @@ public class Contacto implements Parcelable{
         this.edad = edad;
 
     }
-
+    // Getter y setter de variables
     public String getNombre() {
 
         return nombre;
@@ -58,7 +59,7 @@ public class Contacto implements Parcelable{
         this.edad = edad;
 
     }
-
+    // Funciones para comparar diferentes contactos por si son iguales
     @Override
     public boolean equals(Object o) {
 
@@ -92,7 +93,7 @@ public class Contacto implements Parcelable{
         return result;
 
     }
-
+    // Constructor que recibe la propiedad Parcelable
     public Contacto(Parcel in) {
 
         nombre = in.readString();
@@ -102,7 +103,7 @@ public class Contacto implements Parcelable{
         edad = in.readInt();
 
     }
-
+    // Creador del Parcelable
     public static final Creator<Contacto> CREATOR = new Creator<Contacto>() {
 
         @Override
@@ -127,7 +128,7 @@ public class Contacto implements Parcelable{
         return 0;
 
     }
-
+    // Metodo para escribir los valores en el Parcelable
     @Override
     public void writeToParcel(Parcel parcel, int i) {
 
@@ -138,12 +139,16 @@ public class Contacto implements Parcelable{
         parcel.writeInt(edad);
 
     }
-
+    // Funcion para escribir los datos de los contactos
     @Override
     public String toString() {
 
         return "Nombre: " + nombre + ", " + edad + "\nCorreo: " + correo;
 
     }
-
+    // Funcion para comparar
+    @Override
+    public int compareTo(@NonNull Contacto contacto) {
+        return 0;
+    }
 }

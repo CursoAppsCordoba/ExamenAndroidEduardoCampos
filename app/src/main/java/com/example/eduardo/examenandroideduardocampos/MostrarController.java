@@ -16,25 +16,25 @@ import java.util.ArrayList;
  */
 
 class MostrarController extends Activity {
-
-    private Activity activity;
+    // Creamos la variable donde se guardara el activity
+    Activity activity;
 
     private ListView listView;
 
     private ArrayAdapter arrayAdapter;
 
-    MainController mainController;
+    AlertDialog ventana;
 
-    public MostrarController(final Activity activity) {
-
+    public MostrarController(Activity activity) {
+        // Inicializamos el activity
         this.activity = activity;
 
         Intent intent = activity.getIntent();
 
         listView = activity.findViewById(R.id.lstContactos);
-
+        // Creamos un adaptador que recupera los datos del anterior activity
         arrayAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_list_item_1, (ArrayList) intent.getSerializableExtra("listaContactos"));
-
+        // Se lo añadimos al ListView
         listView.setAdapter(arrayAdapter);
 
         Button btnVolver = activity.findViewById(R.id.btnVolver);
@@ -44,37 +44,50 @@ class MostrarController extends Activity {
             @Override
             public void onClick(View view) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                if(ventana == null){
+                    // Funcion para crear el AlertDialog
+                    ventana = CreateDialog();
 
-                builder.setTitle("¿Desea volver?");
+                }
 
-                builder.setMessage("No se guardaran los cambios").setCancelable(false);
-
-                builder.setPositiveButton("Volver", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        activity.finish();
-
-                    }
-
-                });
-
-                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-
-                });
-
-                builder.create().show();
+                ventana.show();
 
             }
 
         });
+
+    }
+
+    // Funcion para crear el AlertDialog
+    private AlertDialog CreateDialog(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        builder.setTitle("¿Desea volver?");
+
+        builder.setMessage("No se guardaran los cambios").setCancelable(false);
+
+        builder.setPositiveButton("Volver", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                activity.finish();
+
+            }
+
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+
+        });
+
+        return builder.create();
 
     }
 

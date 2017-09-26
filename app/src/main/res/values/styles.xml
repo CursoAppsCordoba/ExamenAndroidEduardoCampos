@@ -7,5 +7,17 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <!-- Data application theme. -->
+    <style name="DataTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/dataColorPrimary</item>
+        <item name="colorPrimaryDark">@color/dataColorPrimaryDark</item>
+        <item name="colorAccent">@color/dataColorAccent</item>
+    </style>
+    <!-- List application theme. -->
+    <style name="ListTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/listColorPrimary</item>
+        <item name="colorPrimaryDark">@color/listColorPrimaryDark</item>
+        <item name="colorAccent">@color/listColorAccent</item>
+    </style>
 
 </resources>

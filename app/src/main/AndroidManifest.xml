@@ -18,10 +18,12 @@
         </activity>
         <activity
             android:name=".DatosActivity"
-            android:label="@string/app_second"/>
+            android:label="@string/app_second"
+            android:theme="@style/DataTheme"/>
         <activity
             android:name=".MostrarActivity"
-            android:label="@string/app_third" />
+            android:label="@string/app_third"
+            android:theme="@style/ListTheme"/>
     </application>
 
 </manifest>
