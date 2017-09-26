@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">ExamenAndroidEduardoCampos</string>
+    <!-- Layout name -->
+    <string name="app_name">Agenda de contactos</string>
+    <string name="app_second">Datos del contacto</string>
+    <string name="app_third">Listado de contactos</string>
+    <!-- MainActivity name -->
+    <string name="btnAnadir">Añadir Contacto</string>
+    <string name="btnBuscar">Borrar Contacto</string>
+    <string name="btnTodos">Mostrar Todos</string>
+    <!-- DatosActivity name -->
+    <string name="txtNombre">Nombre:</string>
+    <string name="hntNombre">Escriba nombre aqui...</string>
+    <string name="txtEmail">Email:</string>
+    <string name="hntEmail">Escriba email aqui...</string>
+    <string name="txtEdad">Edad:</string>
+    <string name="hntEdad">Escriba su edad...</string>
+    <string name="btnVolver">Volver</string>
 </resources>

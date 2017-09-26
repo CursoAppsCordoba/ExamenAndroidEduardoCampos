@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.eduardo.examenandroideduardocampos.DatosActivity">
+
+    <TextView
+        android:id="@+id/txtNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/edtNombre"
+        android:layout_alignBottom="@+id/edtNombre"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="37dp"
+        android:layout_marginStart="37dp"
+        android:text="@string/txtNombre" />
+
+    <EditText
+        android:id="@+id/edtNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="@string/hntNombre"
+        android:inputType="textPersonName"
+        tools:ignore="RelativeOverlap" />
+
+    <TextView
+        android:id="@+id/txtEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtNombre"
+        android:layout_alignStart="@+id/txtNombre"
+        android:layout_below="@+id/edtNombre"
+        android:layout_marginTop="51dp"
+        android:text="@string/txtEmail" />
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/edtNombre"
+        android:layout_alignStart="@+id/edtNombre"
+        android:layout_below="@+id/edtNombre"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:hint="@string/hntEmail"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/txtEdad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtEmail"
+        android:layout_alignStart="@+id/txtEmail"
+        android:layout_below="@+id/edtEmail"
+        android:layout_marginTop="57dp"
+        android:text="@string/txtEdad" />
+
+    <EditText
+        android:id="@+id/edtEdad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtEdad"
+        android:layout_alignBottom="@+id/txtEdad"
+        android:layout_alignLeft="@+id/edtEmail"
+        android:layout_alignStart="@+id/edtEmail"
+        android:ems="10"
+        android:hint="@string/hntEdad"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtEdad"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/txtEdad"
+        android:layout_marginBottom="97dp"
+        android:text="@string/btnVolver" />
+
+    <Button
+        android:id="@+id/btnAceptar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/edtEdad"
+        android:layout_alignRight="@+id/edtEdad"
+        android:layout_alignTop="@+id/btnVolver" />
+</RelativeLayout>

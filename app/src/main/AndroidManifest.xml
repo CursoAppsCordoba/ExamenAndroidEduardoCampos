@@ -16,6 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DatosActivity"
+            android:label="@string/app_second"/>
+        <activity
+            android:name=".MostrarActivity"
+            android:label="@string/app_third" />
     </application>
 
 </manifest>
