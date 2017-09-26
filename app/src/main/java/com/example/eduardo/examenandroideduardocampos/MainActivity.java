@@ -34,13 +34,20 @@ public class MainActivity extends AppCompatActivity {
         }
         // Si al volver al activity vuelvo desde borrar contacto
         if(requestCode == mainController.BUSCAR) {
-            // Si la vuelta ala activity ha sido mediante Aceptar
+            // Si la vuelta al activity ha sido mediante Aceptar
             if(resultCode == RESULT_OK){
                 // Funcion para dar de baja
                 mainController.baja(data);
 
             }
 
+        }
+        // Si al volver al activity vuelvo desde mostrar contacto
+        if (requestCode == mainController.TODOS){
+            // Si la vuelta al activity ha sido mediante Aceptar
+            if (resultCode == RESULT_OK){
+                mainController.actualizarContactos(data);
+            }
         }
         // Funcion para cambiar el valor del TextView que muestra el total de contactos
         mainController.actualizarLista();

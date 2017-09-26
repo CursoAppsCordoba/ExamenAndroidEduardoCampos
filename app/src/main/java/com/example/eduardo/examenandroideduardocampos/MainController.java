@@ -195,5 +195,15 @@ public class MainController implements View.OnClickListener {
 
         return toast;
     }
+    // Funcion que recoge el ArrayList y lo convierte en HashSet
+    public void actualizarContactos(Intent intent) {
+
+        if (intent.hasExtra("listado")){
+
+            listaContactos = new HashSet<>((ArrayList)intent.getSerializableExtra("listado"));
+
+        }
+
+    }
 
 }

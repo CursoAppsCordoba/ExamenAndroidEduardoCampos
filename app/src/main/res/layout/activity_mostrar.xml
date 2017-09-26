@@ -11,11 +11,11 @@
 
     <ListView
         android:id="@+id/lstContactos"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="413dp"
+        android:layout_weight="0.43"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        android:layout_weight="0.43" />
+        tools:layout_editor_absoluteY="8dp" />
 
     <Button
         android:id="@+id/btnVolver"
