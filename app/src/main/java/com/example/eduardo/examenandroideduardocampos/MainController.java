@@ -112,8 +112,6 @@ public class MainController implements View.OnClickListener {
                     intent = new Intent(this.activity, MostrarActivity.class);
                     // Convertimos el HashSet en una List para ordenarlo
                     List <Contacto> contactosOrdenados = new ArrayList(listaContactos);
-                    // Se ordena el List
-                    Collections.sort(contactosOrdenados);
                     // Se añade la lista para mandarla al siguiente activity
                     intent.putExtra("listaContactos", (Serializable) contactosOrdenados);
                     // Asigamos valor a la variable para controlar la vuelta

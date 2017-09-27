@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,14 +14,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by Eduardo on 26/09/2017.
  */
 
-class MostrarController extends Activity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener{
+public class MostrarController extends Activity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener{
     // Creamos la variable donde se guardara el activity
     Activity activity;
+
+    final int EDITAR = 500;
 
     private ListView listView;
 
@@ -39,8 +44,6 @@ class MostrarController extends Activity implements AdapterView.OnItemClickListe
         listView = activity.findViewById(R.id.lstContactos);
 
         listaContactos = (ArrayList) intent.getSerializableExtra("listaContactos");
-        // Ordenamos los valores introducidos en el HashSet
-        Collections.sort(listaContactos);
         // Creamos un adaptador que recupera los datos del anterior activity
         arrayAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_list_item_1, listaContactos);
         // Se lo añadimos al ListView
@@ -64,6 +67,8 @@ class MostrarController extends Activity implements AdapterView.OnItemClickListe
             }
 
         });
+
+        listView.setOnItemClickListener(this);
 
         listView.setOnItemLongClickListener(this);
 
@@ -111,7 +116,41 @@ class MostrarController extends Activity implements AdapterView.OnItemClickListe
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        Toast.makeText(activity, "hola", Toast.LENGTH_SHORT).show();
+        final int posicion = i;
+
+        AlertDialog.Builder ventanaEditar = new AlertDialog.Builder(activity);
+
+        ventanaEditar.setTitle("Editar contacto");
+
+        ventanaEditar.setMessage("¿Desea editar el contacto?").setCancelable(false);
+
+        ventanaEditar.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialogo1, int id) {
+
+                Intent intent = new Intent(activity, DatosActivity.class);
+
+                intent.putExtra("contactoEditar", (Parcelable) listaContactos.get(posicion));
+
+                intent.putExtra("posicionEditar", posicion);
+
+                intent.putExtra("botonAccion", "Editar");
+
+                activity.startActivityForResult(intent, EDITAR);
+
+            }
+
+        });
+
+        ventanaEditar.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialogo1, int id) {
+
+            }
+
+        });
+
+        ventanaEditar.show();
 
     }
 
@@ -127,13 +166,17 @@ class MostrarController extends Activity implements AdapterView.OnItemClickListe
         ventanaBorrar.setMessage("Se borrara el siguiente contacto").setCancelable(false);
 
         ventanaBorrar.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
+
             public void onClick(DialogInterface dialogo1, int id) {
 
                 listaContactos.remove(posicion);
 
-                arrayAdapter.notifyDataSetChanged();
+                actualizarListView();
+
             }
+
         });
+
         ventanaBorrar.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialogo1, int id) {
@@ -148,4 +191,29 @@ class MostrarController extends Activity implements AdapterView.OnItemClickListe
 
     }
 
+    // Funcion para crear Toat para informar al usuario
+    public Toast mostrarToast(String s) {
+
+        Toast toast = Toast.makeText(activity.getApplicationContext(), s, Toast.LENGTH_SHORT);
+
+        return toast;
+    }
+
+    public void actualizarListView() {
+
+        arrayAdapter.notifyDataSetChanged();
+
+    }
+
+    public void actualizarContacto(Intent intent) {
+
+        if(intent.hasExtra("contacto")){
+
+            listaContactos.set(intent.getIntExtra("posicionEditar", 0), intent.getParcelableExtra("contacto"));
+
+            mostrarToast("Concacto actualizado");
+
+        }
+
+    }
 }

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by Eduardo on 26/09/2017.
@@ -21,8 +22,8 @@ public class DatosController implements View.OnClickListener{
     Button btnAceptar, btnVolver;
     // Variable para crear una ventana emergente
     private AlertDialog ventana;
-    // Variable para poder llamar a sus funciones
-    MainController mainController;
+
+    private int posicion;
 
     public DatosController(Activity activity){
         // Inicializamos el activity
@@ -46,6 +47,20 @@ public class DatosController implements View.OnClickListener{
         // Asignamos el valor del texto al boton
         btnAceptar.setText(intent.getStringExtra("botonAccion"));
 
+        if (intent.hasExtra("contactoEditar")){
+
+            Contacto contactoEditable = intent.getParcelableExtra("contactoEditar");
+
+            edtNombre.setText(contactoEditable.nombre);
+
+            edtEmail.setText(contactoEditable.correo);
+
+            edtEdad.setText("" + contactoEditable.edad);
+
+            posicion = intent.getIntExtra("posicionEditar", 0);
+
+        }
+
     }
 
     @Override
@@ -62,6 +77,8 @@ public class DatosController implements View.OnClickListener{
                     Intent intent = new Intent();
 
                     intent.putExtra("contacto", contacto);
+
+                    intent.putExtra("posicionEditar", posicion);
 
                     activity.setResult(activity.RESULT_OK, intent);
 
@@ -95,7 +112,7 @@ public class DatosController implements View.OnClickListener{
 
             retVal = true;
 
-            mainController.mostrarToast("Debe introducir un nombre");
+            mostrarToast("Debe introducir un nombre").show();
 
         }
 
@@ -103,7 +120,7 @@ public class DatosController implements View.OnClickListener{
 
             retVal = true;
 
-            mainController.mostrarToast("Debe introducir un correo");
+            mostrarToast("Debe introducir un correo").show();
 
         }
 
@@ -111,7 +128,7 @@ public class DatosController implements View.OnClickListener{
 
             retVal = true;
 
-            mainController.mostrarToast("Debe introducir una edad");
+            mostrarToast("Debe introducir una edad").show();
 
         }
 
@@ -148,6 +165,13 @@ public class DatosController implements View.OnClickListener{
 
         return builder.create();
 
+    }
+    // Funcion para crear Toat para informar al usuario
+    public Toast mostrarToast(String s) {
+
+        Toast toast = Toast.makeText(activity.getApplicationContext(), s, Toast.LENGTH_SHORT);
+
+        return toast;
     }
 
 }
