@@ -15,7 +15,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Eduardo on 26/09/2017.
@@ -44,6 +46,8 @@ public class MostrarController extends Activity implements AdapterView.OnItemCli
         listView = activity.findViewById(R.id.lstContactos);
 
         listaContactos = (ArrayList) intent.getSerializableExtra("listaContactos");
+
+        Collections.sort(listaContactos);
         // Creamos un adaptador que recupera los datos del anterior activity
         arrayAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_list_item_1, listaContactos);
         // Se lo añadimos al ListView
@@ -81,7 +85,7 @@ public class MostrarController extends Activity implements AdapterView.OnItemCli
 
         builder.setTitle("¿Desea volver?");
 
-        builder.setMessage("No se guardaran los cambios").setCancelable(false);
+        builder.setMessage("Volvera al menu principal").setCancelable(false);
 
         builder.setPositiveButton("Volver", new DialogInterface.OnClickListener() {
 
@@ -197,6 +201,7 @@ public class MostrarController extends Activity implements AdapterView.OnItemCli
         Toast toast = Toast.makeText(activity.getApplicationContext(), s, Toast.LENGTH_SHORT);
 
         return toast;
+
     }
 
     public void actualizarListView() {
@@ -209,11 +214,26 @@ public class MostrarController extends Activity implements AdapterView.OnItemCli
 
         if(intent.hasExtra("contacto")){
 
-            listaContactos.set(intent.getIntExtra("posicionEditar", 0), intent.getParcelableExtra("contacto"));
+            Contacto contactoNuevo =  intent.getParcelableExtra("contacto");
 
-            mostrarToast("Concacto actualizado");
+            Set<Contacto> nuevaLista = new HashSet<>(listaContactos);
+
+            if(nuevaLista.add(contactoNuevo)){
+
+                listaContactos.set(intent.getIntExtra("posicionEditar", 0),contactoNuevo);
+
+                Collections.sort(listaContactos);
+
+                mostrarToast("Concacto actualizado").show();
+
+            } else {
+
+                mostrarToast("El contacto ya existe").show();
+
+            }
 
         }
 
     }
+
 }

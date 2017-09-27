@@ -148,7 +148,9 @@ public class Contacto implements Parcelable, Comparable<Contacto>{
     }
     // Funcion para comparar
     @Override
-    public int compareTo(@NonNull Contacto contacto) {
-        return 0;
+    public int compareTo(Contacto contacto) {
+
+        return this.getNombre().compareTo(contacto.getNombre());
+
     }
 }
